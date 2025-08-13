@@ -5,9 +5,11 @@
 services:
   burncloud-docs-db:
     image: mysql:8.4
+    env_file:
+      - .env
     environment:
-      MYSQL_DATABASE: burncloud-docs
-      MYSQL_ROOT_PASSWORD: 123456qwe!@#
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./dev/docker/init.db:/docker-entrypoint-initdb.d
       - ./burncloud_docs_mysql_data:/var/lib/mysql
@@ -18,27 +20,19 @@ services:
     build:
       context: .
       dockerfile: ./dev/docker/Dockerfile
+    env_file:
+      - .env
     environment:
-      APP_URL: https://docs.burncloud.com
       DB_CONNECTION: mysql
-      DB_HOST: burncloud-docs-db
       DB_PORT: 3306
-      DB_DATABASE: burncloud-docs
-      DB_USERNAME: root
-      DB_PASSWORD: 123456qwe!@#
-      TEST_DATABASE_URL: mysql://root:123456qwe%21%40%23@burncloud-docs-db/burncloud-docs
-      MAIL_DRIVER: smtp
-      MAIL_HOST: smtp.exmail.qq.com
-      MAIL_PORT: 465
-      MAIL_USERNAME: contact@burncloud.com
-      MAIL_PASSWORD: 3H59uyWkgJBYpuBH
-      MAIL_ENCRYPTION: ssl
     volumes:
       - ./:/app
+      - ./public/dist:/app/public/dist
+      - ./node_modules:/app/node_modules
       - ./dev/docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     entrypoint: /app/dev/docker/entrypoint.app.sh
     extra_hosts:
-    - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway"
     networks:
       - nginx-network
     container_name: burncloud-docs-app
@@ -48,6 +42,8 @@ services:
     user: node
     volumes:
       - ./:/app
+      - ./public/dist:/app/public/dist
+      - ./node_modules:/app/node_modules
     entrypoint: /app/dev/docker/entrypoint.node.sh
     networks:
       - nginx-network
