@@ -26,7 +26,7 @@ services:
       DB_DATABASE: burncloud-docs
       DB_USERNAME: root
       DB_PASSWORD: 123456qwe!@#
-      TEST_DATABASE_URL: mysql://root:123456qwe!@#@burncloud-docs-db/burncloud-docs
+      TEST_DATABASE_URL: mysql://root:123456qwe%21%40%23@burncloud-docs-db/burncloud-docs
       MAIL_DRIVER: smtp
       MAIL_HOST: smtp.exmail.qq.com
       MAIL_PORT: 465
