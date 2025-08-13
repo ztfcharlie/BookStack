@@ -35,4 +35,9 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
 
 ENV APACHE_DOCUMENT_ROOT="/app/public"
 
+# Create required directories and set permissions
+# Note: These are created in the image, but volumes will overlay them at runtime
+RUN mkdir -p /app/public/dist /app/node_modules /app/storage/logs && \
+    chmod -R 777 /app/public/dist /app/node_modules /app/storage/logs
+
 WORKDIR /app
