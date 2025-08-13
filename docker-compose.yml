@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: 123456qwe!@#
     volumes:
       - ./dev/docker/init.db:/docker-entrypoint-initdb.d
-      - burncloud_docs_mysql_data:/var/lib/mysql
+      - ./burncloud_docs_mysql_data:/var/lib/mysql
     networks:
       - nginx-network
     container_name: burncloud-docs-db
