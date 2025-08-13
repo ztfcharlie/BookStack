@@ -27,6 +27,7 @@ services:
       DB_PORT: 3306
     volumes:
       - ./:/app
+      - ./public/uploads:/app/public/uploads
       - ./public/dist:/app/public/dist
       - ./node_modules:/app/node_modules
       - ./dev/docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
