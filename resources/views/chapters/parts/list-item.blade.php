@@ -16,8 +16,8 @@
             <button type="button"
                     refs="chapter-contents@toggle"
                     aria-expanded="false"
-                    class="text-muted chapter-contents-toggle">@icon('caret-right') <span>{{ trans_choice('entities.x_pages', $chapter->visible_pages->count()) }}</span></button>
-            <div refs="chapter-contents@list" class="inset-list chapter-contents-list">
+                    class="text-muted chapter-contents-toggle open">@icon('caret-right') <span>{{ trans_choice('entities.x_pages', $chapter->visible_pages->count()) }}</span></button>
+            <div refs="chapter-contents@list" class="chapter-contents-list">
                 <div class="entity-list-item-children">
                     @include('entities.list', ['entities' => $chapter->visible_pages])
                 </div>
